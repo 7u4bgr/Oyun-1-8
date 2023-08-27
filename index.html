@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let numbers = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 0]
+        ]
+
+        function drawAll() {
+
+            for (let y = 0; y < 3; y++) {
+                for (let x = 0; x < 3; x++) {
+                    let control = document.createElement("div")
+                    control.classList.add("control")
+                    let button = document.createElement("button")
+                    button.classList.add("button")
+                    button.innerHTML = numbers[y][x]
+                    button.addEventListener("click", (e) => {
+                        console.log(e);
+                        function myFunc(move) {
+                            for (let a = 0; a < move.length; a++) {
+                                for (let b = 0; b < move[a].length; b++) {
+                                    const arow = Math.floor(Math.random() * move.length)
+                                    const bcol = Math.floor(Math.random() * move[a].length)
+                                    const c=move[a][b]
+                                    move[a][b]=move[arow][bcol]
+                                    move[arow][bcol]=c
+                                }
+                                return move
+                            }
+                            myFunc(numbers)
+                        }
+                        console.log(numbers);
+                    })
+                    if (numbers[y][x] == 0) {
+                        button.classList.add("button1")
+                    }
+                    control.appendChild(button)
+                    document.body.appendChild(control)
+                }
+            }
+        }
+        function shuffle2DArray(array) {
+            for (let i = 0; i < array.length; i++) {
+                for (let j = 0; j < array[i].length; j++) {
+                    const randRow = Math.floor(Math.random() * array.length)
+                    const randCol = Math.floor(Math.random() * array[i].length)
+                    const temp = array[i][j]
+                    array[i][j] = array[randRow][randCol]
+                    array[randRow][randCol] = temp
+                }
+            }
+            return array
+        }
+        shuffle2DArray(numbers);
+        console.log(numbers);
+        drawAll();
+
+    </script>
+</body>
+
+</html>
